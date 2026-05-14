@@ -46,10 +46,18 @@ function bookNow() {
 </script>
 
 <template>
-  <div class="card bg-base-100 shadow-xl card-hover animate-on-mount overflow-hidden">
+  <div
+    v-motion
+    :initial="{ opacity: 0, y: 40 }"
+    :visible-once="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+    class="card bg-base-100 shadow-xl card-hover overflow-hidden group"
+  >
     <!-- Header cu avatar și badge de verificare -->
-    <div class="relative bg-gradient-to-br from-orange-100 via-amber-50 to-pink-100 p-8 flex justify-center">
-      <div class="text-8xl">{{ sitter.avatar }}</div>
+    <div class="relative bg-gradient-to-br from-orange-100 via-amber-50 to-pink-100 p-8 flex justify-center overflow-hidden">
+      <div class="text-8xl group-hover:scale-110 transition-transform duration-500">{{ sitter.avatar }}</div>
+      <!-- Pattern decorativ pe fundal -->
+      <div class="absolute top-2 left-2 text-3xl opacity-10">🐾</div>
+      <div class="absolute bottom-2 right-2 text-3xl opacity-10">🐾</div>
       <div v-if="sitter.verified" class="absolute top-3 right-3">
         <div class="badge badge-success gap-1 text-white font-semibold">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">

@@ -2,12 +2,6 @@
 // Pagina "Despre noi"
 // Pagină statică care prezintă platforma PawSitter
 
-const team = [
-  { name: 'Robert', role: 'Fondator & CEO', avatar: '👨‍💼', bio: 'Pasionat de tehnologie și animale' },
-  { name: 'Maria', role: 'Head of Operations', avatar: '👩‍💼', bio: 'Experiență de 10 ani în pet care' },
-  { name: 'Andrei', role: 'Lead Developer', avatar: '👨‍💻', bio: 'Construiește platforma cu Vue 3' },
-]
-
 const features = [
   { icon: '🛡️', title: 'Sitters verificați', desc: 'Toți sitter-ii trec printr-un proces riguros de verificare' },
   { icon: '⭐', title: 'Recenzii reale', desc: 'Doar utilizatori reali pot lăsa recenzii' },
@@ -78,31 +72,6 @@ const features = [
               <div class="text-5xl mb-2">{{ feature.icon }}</div>
               <h3 class="card-title">{{ feature.title }}</h3>
               <p class="opacity-70">{{ feature.desc }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Echipă -->
-    <section class="py-20 bg-base-100">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold mb-4">Echipa noastră</h2>
-          <p class="text-lg opacity-70">Oamenii din spatele platformei</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div
-            v-for="member in team"
-            :key="member.name"
-            class="card bg-base-200 card-hover"
-          >
-            <div class="card-body items-center text-center">
-              <div class="text-7xl mb-2">{{ member.avatar }}</div>
-              <h3 class="card-title">{{ member.name }}</h3>
-              <div class="badge badge-primary">{{ member.role }}</div>
-              <p class="opacity-70 text-sm">{{ member.bio }}</p>
             </div>
           </div>
         </div>

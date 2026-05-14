@@ -1,0 +1,74 @@
+/* Stiluri globale — directive Tailwind */
+/* Aceste directive instruiesc Tailwind să injecteze stilurile generate */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Stiluri personalizate care folosesc Tailwind prin @apply */
+@layer components {
+  /* Clasă utilitară pentru carduri cu efect de hover */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+  }
+
+  /* Gradient pentru fundal — folosit în hero section */
+  .gradient-bg {
+    background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 50%, #fce7f3 100%);
+  }
+
+  /* Animație pentru elementele care apar treptat */
+  .animate-on-mount {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+}
+
+/* Scrollbar personalizat pentru un aspect mai modern */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f97316;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
+
+/* Tranziții pentru router-view */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Tooltip personalizat — pentru directiva v-tooltip */
+.custom-tooltip {
+  position: absolute;
+  background: #1f2937;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

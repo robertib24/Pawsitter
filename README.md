@@ -1,7 +1,5 @@
 # 🐾 PawSitter - Platformă de Pet Sitting
 
-Proiect demonstrativ Vue 3 + Tailwind CSS + DaisyUI
-
 ## 📋 Despre proiect
 
 PawSitter este o platformă unde proprietarii de animale pot găsi și rezerva pet sitters de încredere. Proiectul acoperă următoarele concepte:

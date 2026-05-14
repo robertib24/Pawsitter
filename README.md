@@ -4,7 +4,7 @@ Proiect demonstrativ Vue 3 + Tailwind CSS + DaisyUI
 
 ## 📋 Despre proiect
 
-PawSitter este o platformă unde proprietarii de animale pot găsi și rezerva pet sitters de încredere. Proiectul acoperă toate conceptele cerute:
+PawSitter este o platformă unde proprietarii de animale pot găsi și rezerva pet sitters de încredere. Proiectul acoperă următoarele concepte:
 
 - **a) Vue fundamentals** — data binding, directive (v-if, v-for, v-model), reactivitate
 - **b) Setup dev environment** — Vite, Tailwind CSS, DaisyUI, instalare dependențe
@@ -177,10 +177,6 @@ CMD ["npm", "run", "dev"]
 - Setup Stores cu Composition API
 - State, getters, actions
 - Persistare în localStorage
-
-## 👥 Autori
-
-Proiect demonstrativ realizat pentru cursul de Vue 3.
 
 ## 📄 Licență
 

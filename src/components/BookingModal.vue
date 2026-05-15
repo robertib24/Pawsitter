@@ -4,6 +4,7 @@
 
 import { ref, reactive, computed, watch } from 'vue'
 import { useBookingsStore } from '../stores/bookings.js'
+import { useToast } from '../composables/useToast.js'
 
 const props = defineProps({
   sitter: { type: Object, default: null },
@@ -13,6 +14,7 @@ const props = defineProps({
 const emit = defineEmits(['close', 'booked'])
 
 const bookingsStore = useBookingsStore()
+const toast = useToast()
 
 // Datele formularului — reactive pentru a fi observabile
 const form = reactive({
@@ -102,6 +104,7 @@ async function handleSubmit() {
 
   loading.value = false
   success.value = true
+  toast.success(`Rezervare confirmată la ${props.sitter.name}! 🎉`, 4000)
 
   // Închidem modalul după 2 secunde
   setTimeout(() => {
@@ -144,7 +147,7 @@ async function handleSubmit() {
               v-model="form.petName"
               v-focus
               type="text"
-              placeholder="Ex: Rex, Mishmish..."
+              placeholder="Ex: Max, Mishmish..."
               class="input input-bordered"
               :class="{ 'input-error': errors.petName }"
             />

@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth.js'
 import { useSittersStore } from '../stores/sitters.js'
 import BookingModal from '../components/BookingModal.vue'
+import StarRating from '../components/StarRating.vue'
 
 // props.id vine automat din URL-ul rutei /sitters/:id
 // Aceasta funcționează deoarece am setat props: true în router
@@ -102,9 +103,7 @@ function goBack() {
                   <h1 class="text-3xl font-bold">{{ sitter.name }}</h1>
                   <p class="opacity-70 mt-1">📍 {{ sitter.location }}</p>
                   <div class="flex items-center gap-2 mt-2">
-                    <div class="rating rating-sm">
-                      <input v-for="n in 5" :key="n" type="radio" disabled :checked="n === Math.round(sitter.rating)" class="mask mask-star-2 bg-orange-400" />
-                    </div>
+                    <StarRating :rating="sitter.rating" size="md" />
                     <span class="font-bold">{{ sitter.rating }}</span>
                     <span class="opacity-70">({{ sitter.reviewsCount }} recenzii)</span>
                   </div>
@@ -193,9 +192,7 @@ function goBack() {
                       <div class="flex justify-between items-start">
                         <div>
                           <div class="font-semibold">{{ review.user }}</div>
-                          <div class="rating rating-xs">
-                            <input v-for="n in 5" :key="n" type="radio" disabled :checked="n === review.rating" class="mask mask-star-2 bg-orange-400" />
-                          </div>
+                          <StarRating :rating="review.rating" size="xs" />
                         </div>
                         <span class="text-xs opacity-60">{{ review.date }}</span>
                       </div>

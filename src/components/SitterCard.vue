@@ -1,12 +1,10 @@
 <script setup>
 // Componenta SitterCard — card reutilizabil pentru afișarea unui pet sitter
-// Demonstrează: props, emits, componente reutilizabile, slot-uri
+// Demonstrează: props, emits, componente reutilizabile
 
-import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import StarRating from './StarRating.vue'
 
-// Definim props-urile pe care componenta le primește de la părinte
-// Fiecare prop are tip și opțional validare
 const props = defineProps({
   sitter: {
     type: Object,
@@ -18,13 +16,6 @@ const props = defineProps({
 const emit = defineEmits(['book'])
 
 const router = useRouter()
-
-// Computed pentru afișarea ratingului ca stele
-const stars = computed(() => {
-  const full = Math.floor(props.sitter.rating)
-  const hasHalf = props.sitter.rating % 1 >= 0.5
-  return { full, hasHalf, empty: 5 - full - (hasHalf ? 1 : 0) }
-})
 
 // Iconițe pentru fiecare tip de serviciu
 const serviceIcons = {
@@ -85,11 +76,7 @@ function bookNow() {
 
       <!-- Rating cu stele -->
       <div class="flex items-center gap-2 mt-2">
-        <div class="flex">
-          <span v-for="n in stars.full" :key="`full-${n}`" class="text-yellow-400">★</span>
-          <span v-if="stars.hasHalf" class="text-yellow-400">⯨</span>
-          <span v-for="n in stars.empty" :key="`empty-${n}`" class="text-gray-300">★</span>
-        </div>
+        <StarRating :rating="sitter.rating" size="sm" />
         <span class="font-semibold">{{ sitter.rating }}</span>
         <span class="text-sm opacity-70">({{ sitter.reviewsCount }} recenzii)</span>
       </div>

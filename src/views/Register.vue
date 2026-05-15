@@ -5,9 +5,11 @@
 import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth.js'
+import { useToast } from '../composables/useToast.js'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const toast = useToast()
 
 const form = reactive({
   name: '',
@@ -97,6 +99,7 @@ async function handleSubmit() {
   })
 
   if (result.success) {
+    toast.success(`Bun venit în comunitatea PawSitter, ${form.name}! 🎉`, 4000)
     router.push('/')
   } else {
     serverError.value = result.error

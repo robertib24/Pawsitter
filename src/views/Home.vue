@@ -9,6 +9,7 @@ import gsap from 'gsap'
 import { useSittersStore } from '../stores/sitters.js'
 import SitterCard from '../components/SitterCard.vue'
 import BookingModal from '../components/BookingModal.vue'
+import StarRating from '../components/StarRating.vue'
 
 const router = useRouter()
 const sittersStore = useSittersStore()
@@ -196,15 +197,9 @@ onMounted(() => {
             >
               <div class="text-center">
                 <div class="text-8xl mb-4 animate-bounce-slow">🐕</div>
-                <h3 class="font-bold text-2xl">Rex are nevoie de plimbare?</h3>
+                <h3 class="font-bold text-2xl">Max are nevoie de plimbare?</h3>
                 <p class="opacity-70 mt-2">Găsești sitter în mai puțin de 2 minute</p>
-                <div class="rating rating-lg mt-4">
-                  <input type="radio" class="mask mask-star-2 bg-orange-400" checked disabled />
-                  <input type="radio" class="mask mask-star-2 bg-orange-400" checked disabled />
-                  <input type="radio" class="mask mask-star-2 bg-orange-400" checked disabled />
-                  <input type="radio" class="mask mask-star-2 bg-orange-400" checked disabled />
-                  <input type="radio" class="mask mask-star-2 bg-orange-400" checked disabled />
-                </div>
+                <StarRating :rating="5" size="lg" class="mt-4 justify-center" />
               </div>
             </div>
 
@@ -401,9 +396,7 @@ onMounted(() => {
             <div class="absolute top-4 right-4 text-6xl opacity-10 font-serif leading-none">"</div>
 
             <div class="card-body">
-              <div class="rating rating-sm mb-2">
-                <input v-for="n in 5" :key="n" type="radio" disabled checked class="mask mask-star-2 bg-orange-400" />
-              </div>
+              <StarRating :rating="testimonial.stars" size="md" class="mb-2" />
               <p class="italic opacity-80 relative z-10">"{{ testimonial.text }}"</p>
               <div class="flex items-center gap-3 mt-4">
                 <div class="text-4xl">{{ testimonial.avatar }}</div>

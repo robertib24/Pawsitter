@@ -5,10 +5,12 @@
 import { ref, reactive, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth.js'
+import { useToast } from '../composables/useToast.js'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
+const toast = useToast()
 
 // Folosim reactive pentru a grupa toate câmpurile formularului într-un obiect reactiv
 // Întregul obiect devine observabil — orice schimbare declanșează re-randarea componentei
@@ -71,6 +73,7 @@ async function handleSubmit() {
   })
 
   if (result.success) {
+    toast.success(`Bine ai revenit, ${authStore.user.name}! 🐾`)
     // Redirectăm către pagina inițială sau Home
     const redirect = route.query.redirect || '/'
     router.push(redirect)

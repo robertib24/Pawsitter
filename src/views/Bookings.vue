@@ -4,8 +4,10 @@
 
 import { ref, computed } from 'vue'
 import { useBookingsStore } from '../stores/bookings.js'
+import { useToast } from '../composables/useToast.js'
 
 const bookingsStore = useBookingsStore()
+const toast = useToast()
 const activeFilter = ref('all') // 'all', 'confirmed', 'completed', 'cancelled'
 
 // Filtrăm rezervările în funcție de tab-ul activ
@@ -37,10 +39,24 @@ const statusConfig = {
   cancelled: { label: 'Anulată', color: 'badge-error', icon: '✕' }
 }
 
-function cancelBooking(id) {
-  if (confirm('Sigur dorești să anulezi această rezervare?')) {
-    bookingsStore.cancelBooking(id)
+// State pentru modal de confirmare (mai elegant decât confirm() nativ)
+const bookingToCancel = ref(null)
+
+function askCancelBooking(id) {
+  bookingToCancel.value = id
+}
+
+function confirmCancel() {
+  if (bookingToCancel.value !== null) {
+    bookingsStore.cancelBooking(bookingToCancel.value)
+    toast.success('Rezervarea a fost anulată cu succes')
+    bookingToCancel.value = null
   }
+}
+
+function completeBookingWithToast(id) {
+  bookingsStore.completeBooking(id)
+  toast.success('Rezervare marcată ca finalizată! 🎉')
 }
 </script>
 
@@ -158,14 +174,14 @@ function cancelBooking(id) {
           <div class="card-actions justify-end mt-2">
             <button
               v-if="booking.status === 'confirmed'"
-              @click="cancelBooking(booking.id)"
+              @click="askCancelBooking(booking.id)"
               class="btn btn-outline btn-error btn-sm"
             >
               Anulează
             </button>
             <button
               v-if="booking.status === 'confirmed'"
-              @click="bookingsStore.completeBooking(booking.id)"
+              @click="completeBookingWithToast(booking.id)"
               class="btn btn-outline btn-success btn-sm"
             >
               Marchează ca finalizată
@@ -179,6 +195,26 @@ function cancelBooking(id) {
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Modal confirmare anulare — mai elegant decât confirm() native -->
+    <div v-if="bookingToCancel !== null" class="modal modal-open">
+      <div class="modal-box">
+        <div class="text-center">
+          <div class="text-6xl mb-4">😢</div>
+          <h3 class="font-bold text-xl mb-2">Anulezi rezervarea?</h3>
+          <p class="opacity-70">Această acțiune nu poate fi anulată. Ești sigur că vrei să continui?</p>
+        </div>
+        <div class="modal-action justify-center">
+          <button @click="bookingToCancel = null" class="btn btn-ghost">
+            Nu, păstrez rezervarea
+          </button>
+          <button @click="confirmCancel" class="btn btn-error">
+            Da, anulează
+          </button>
+        </div>
+      </div>
+      <div class="modal-backdrop bg-black/50" @click="bookingToCancel = null"></div>
     </div>
   </div>
 </template>
